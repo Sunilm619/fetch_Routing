@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { Audio } from 'react-loader-spinner'
 
 function Blogitem(props) {
+    const [st, setSt] = useState(true)
     const [lis, setLis] = useState({})
     // console.log(useParams())
     const { id } = useParams()
@@ -20,6 +22,7 @@ function Blogitem(props) {
         }
         // console.log(updtedlist)
         setLis(updtedlist)
+        setSt(false)
         console.log(lis)
     }
     useEffect(() => {
@@ -27,17 +30,21 @@ function Blogitem(props) {
     }, [])
 
     return (
-        <div className='text-center '>
-            <h1 className='text-3xl font-bold'>{lis.title}</h1>
-            <div className='flex items-center'>
-                <img className='w-1/12 h-4/6 rounded-full' src={lis.aurl} alt="Author Image" />
-                <h3 className='ml-3'>{lis.author}</h3>
+        <>
+            {st ? <Audio /> : (<div className='text-center '>
+                <h1 className='text-3xl font-bold'>{lis.title}</h1>
+                <div className='flex items-center'>
+                    <img className='w-1/12 h-4/6 rounded-full' src={lis.aurl} alt="Author Image" />
+                    <h3 className='ml-3'>{lis.author}</h3>
 
-            </div>
-            <img className='w-8/12 mx-auto mt-4' src={lis.iurl} alt="Blog Image" />
-            <p className=''>{lis.content}</p>
+                </div>
+                <img className='w-8/12 mx-auto mt-4' src={lis.iurl} alt="Blog Image" />
+                <p className=''>{lis.content}</p>
 
-        </div >
+            </div >)}
+        </>
+
+
     )
 }
 
