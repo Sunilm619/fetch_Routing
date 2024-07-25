@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom';
 import { Audio } from 'react-loader-spinner'
+import '../../../node_modules/bootstrap/dist/css/bootstrap.css';
 
 function Bloglist() {
     const [spn, setSpn] = useState(true)
@@ -24,21 +25,25 @@ function Bloglist() {
                 wrapperStyle
                 wrapperClass
             /> :
-                dat.map(e => <NavLink to={`/blogs/${e.id}`} ><div key={e.id} className=' border-2 mb-2'>
-                    <div className='flex'>
-                        <div >
-                            <img src={e.image_url} className='w-[30vw]' alt={e.id} />
-                        </div>
-                        <div >
-                            <p>{e.topic}</p>
-                            <h1 className='font-bold'>{e.title}</h1>
+                dat.map(e => <div key={e.id} className='container border-2 mb-2'>
+                    <div className='row'>
+                        <NavLink to={`/blogs/${e.id}`} >
                             <div className='flex'>
-                                <img className='w-1/12' src={e.avatar_url} alt={e.id} />
-                                <p>{e.author}</p>
+                                <div className='col-4'>
+                                    <img src={e.image_url} className='w-[30vw]' alt={e.id} />
+                                </div>
+                                <div className='col-8 ml-4'>
+                                    <p>{e.topic}</p>
+                                    <h5 className='font-bold'>{e.title}</h5>
+                                    <div className='flex'>
+                                        <img className='w-1/12 rounded-full' src={e.avatar_url} alt={e.id} />
+                                        <p>{e.author}</p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        </NavLink>
                     </div>
-                </div></NavLink>)
+                </div>)
             }
 
         </div >
@@ -46,3 +51,4 @@ function Bloglist() {
 }
 
 export default Bloglist;
+//<NavLink to={`/blogs/${e.id}`} >
